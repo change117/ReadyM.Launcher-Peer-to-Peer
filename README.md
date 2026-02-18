@@ -78,6 +78,16 @@ ReadyM.Launcher-Peer-to-Peer/
 - `npm run dev` - Start development server with auto-reload
 - `npm test` - Run tests (to be implemented)
 
+### Configuration
+
+Edit `config.json` to customize:
+- Port settings
+- P2P connection parameters
+- File upload limits
+- Security settings
+
+⚠️ **Security Warning**: The default configuration has encryption and authentication disabled for ease of development. **Always enable these features before deploying to production** to protect user data and prevent unauthorized access.
+
 ### Adding Files
 
 You can upload files through:

@@ -12,12 +12,14 @@
   },
   "upload": {
     "enabled": true,
-    "maxFileSize": "100MB",
+    "maxFileSize": 104857600,
+    "maxFileSizeDisplay": "100MB",
     "allowedTypes": ["*"],
     "storageDir": "./uploads"
   },
   "security": {
     "enableEncryption": false,
-    "requireAuthentication": false
+    "requireAuthentication": false,
+    "_comment": "WARNING: Encryption and authentication are disabled by default for development. Enable these features before deploying to production to protect user data and prevent unauthorized access."
   }
 }

@@ -121,6 +121,54 @@
             color: #92400e;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .notification.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .notification.info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .notification-message {
+            color: #666;
+            font-size: 14px;
+        }
+
         .features {
             margin-top: 30px;
         }
@@ -143,6 +191,11 @@
     </style>
 </head>
 <body>
+    <div id="notification" class="notification">
+        <div class="notification-title" id="notificationTitle">Notification</div>
+        <div class="notification-message" id="notificationMessage"></div>
+    </div>
+
     <div class="container">
         <h1>🚀 ReadyM Launcher</h1>
         <p class="subtitle">Peer-to-Peer Mode for Wukong</p>
@@ -177,6 +230,22 @@
     </div>
 
     <script>
+        // Notification system
+        function showNotification(title, message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notificationTitle');
+            const notificationMessage = document.getElementById('notificationMessage');
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            notification.className = 'notification show ' + type;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
         // Check status on load
         fetch('/api/status')
             .then(response => response.json())
@@ -196,7 +265,12 @@
                 for (let i = 0; i < files.length; i++) {
                     fileNames.push(files[i].name);
                 }
-                alert(`Selected files:\n${fileNames.join('\n')}\n\nFile upload endpoint will be implemented in the next phase.`);
+                
+                showNotification(
+                    'Files Selected',
+                    `Selected ${files.length} file(s): ${fileNames.join(', ')}\n\nFile upload endpoint will be implemented in the next phase.`,
+                    'success'
+                );
             }
         });
     </script>
