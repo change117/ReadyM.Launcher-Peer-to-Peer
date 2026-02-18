@@ -1,0 +1,17 @@
+{
+  "game": "Wukong",
+  "game_path": "/home/username/.steam/steam/steamapps/common/BlackMythWukong/Binaries/Linux/b1-Linux-Shipping",
+  "discovery_port": 25565,
+  "game_port": 27015,
+  "player_name": "Player1",
+  "lan_only": true,
+  "max_players": 4,
+  "notes": {
+    "platform": "Linux - Steam",
+    "game_path": "Update this path to match your installation. Replace 'username' with your actual username.",
+    "discovery_port": "UDP port for peer discovery on LAN",
+    "game_port": "Port used for game connections",
+    "lan_only": "Restrict to local network only for security",
+    "permissions": "May need to run with sudo for network broadcasts"
+  }
+}

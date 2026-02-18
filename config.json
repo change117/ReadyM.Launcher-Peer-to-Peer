@@ -1,0 +1,15 @@
+{
+  "game": "Wukong",
+  "game_path": "",
+  "discovery_port": 25565,
+  "game_port": 27015,
+  "player_name": "TestPlayer",
+  "lan_only": true,
+  "max_players": 4,
+  "notes": {
+    "game_path": "Set this to the full path of the game executable",
+    "discovery_port": "UDP port for peer discovery on LAN",
+    "game_port": "Port used for game connections",
+    "lan_only": "Restrict to local network only for security"
+  }
+}
