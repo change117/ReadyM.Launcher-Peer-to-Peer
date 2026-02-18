@@ -8,7 +8,6 @@ import os
 import sys
 import json
 import socket
-import threading
 import argparse
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -134,10 +133,7 @@ class P2PLauncher:
             print("Searching for peers...")
             found_peers = []
             
-            # Listen for responses
-            start_time = threading.Event()
-            timeout = 3.0
-            
+            # Listen for responses (timeout already set on socket)
             try:
                 while True:
                     data, addr = sock.recvfrom(1024)
