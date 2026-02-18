@@ -1,0 +1,5 @@
+# ReadyM.Launcher Requirements
+# Python 3.7+ required
+
+# No external dependencies required for basic functionality
+# All networking uses built-in socket library

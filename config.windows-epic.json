@@ -1,0 +1,16 @@
+{
+  "game": "Wukong",
+  "game_path": "C:\\Program Files\\Epic Games\\BlackMythWukong\\Binaries\\Win64\\b1-Win64-Shipping.exe",
+  "discovery_port": 25565,
+  "game_port": 27015,
+  "player_name": "Player1",
+  "lan_only": true,
+  "max_players": 4,
+  "notes": {
+    "platform": "Windows - Epic Games Store",
+    "game_path": "Update this path to match your installation",
+    "discovery_port": "UDP port for peer discovery on LAN",
+    "game_port": "Port used for game connections",
+    "lan_only": "Restrict to local network only for security"
+  }
+}
