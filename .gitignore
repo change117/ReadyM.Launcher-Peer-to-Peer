@@ -28,3 +28,7 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+
+# Uploaded files (keep directory, ignore contents)
+uploads/*
+!uploads/README.md

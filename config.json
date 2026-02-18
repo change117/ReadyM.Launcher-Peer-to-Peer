@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "ReadyM Launcher P2P",
+    "version": "0.1.0",
+    "port": 3000
+  },
+  "p2p": {
+    "enabled": true,
+    "maxPeers": 50,
+    "discoveryInterval": 30000,
+    "connectionTimeout": 10000
+  },
+  "upload": {
+    "enabled": true,
+    "maxFileSize": "100MB",
+    "allowedTypes": ["*"],
+    "storageDir": "./uploads"
+  },
+  "security": {
+    "enableEncryption": false,
+    "requireAuthentication": false
+  }
+}
