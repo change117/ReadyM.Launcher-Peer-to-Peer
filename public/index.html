@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadyM Launcher - P2P Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .status {
+            background: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .upload-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 2px dashed #d1d5db;
+        }
+
+        .upload-section h2 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-input-button {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .file-input-button:hover {
+            background: #5568d3;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef3c7;
+            border-radius: 8px;
+            color: #92400e;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .notification.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .notification.info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .notification-message {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: #22c55e;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification">
+        <div class="notification-title" id="notificationTitle">Notification</div>
+        <div class="notification-message" id="notificationMessage"></div>
+    </div>
+
+    <div class="container">
+        <h1>🚀 ReadyM Launcher</h1>
+        <p class="subtitle">Peer-to-Peer Mode for Wukong</p>
+        
+        <div class="status">
+            <span class="status-indicator"></span>
+            <strong>Status:</strong> <span id="status-text">Checking connection...</span>
+        </div>
+
+        <div class="features">
+            <h2>Features:</h2>
+            <div class="feature-item">Direct peer-to-peer connections</div>
+            <div class="feature-item">No central server dependency</div>
+            <div class="feature-item">Enhanced privacy and control</div>
+            <div class="feature-item">File sharing support</div>
+        </div>
+
+        <div class="upload-section">
+            <h2>📁 Upload Files</h2>
+            <p style="color: #6b7280; margin-bottom: 15px;">
+                Upload game files, mods, or configuration files
+            </p>
+            <div class="file-input-wrapper">
+                <button class="file-input-button">Choose Files</button>
+                <input type="file" id="fileInput" multiple />
+            </div>
+            <div class="info-box">
+                <strong>Note:</strong> File upload functionality will store files locally. 
+                In P2P mode, you can share these files directly with other peers.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Notification system
+        function showNotification(title, message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notificationTitle');
+            const notificationMessage = document.getElementById('notificationMessage');
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            notification.className = 'notification show ' + type;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Check status on load
+        fetch('/api/status')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('status-text').textContent = 
+                    `Connected (${data.mode} - v${data.version})`;
+            })
+            .catch(error => {
+                document.getElementById('status-text').textContent = 'Offline';
+            });
+
+        // File input handling
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                let fileNames = [];
+                for (let i = 0; i < files.length; i++) {
+                    fileNames.push(files[i].name);
+                }
+                
+                showNotification(
+                    'Files Selected',
+                    `Selected ${files.length} file(s): ${fileNames.join(', ')}\n\nFile upload endpoint will be implemented in the next phase.`,
+                    'success'
+                );
+            }
+        });
+    </script>
+</body>
+</html>
