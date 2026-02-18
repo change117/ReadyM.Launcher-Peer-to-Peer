@@ -82,11 +82,23 @@ class P2PLauncher:
         """Start UDP discovery server for finding peers on LAN."""
         discovery_port = self.config.get("discovery_port", 25565)
         
+        # Security check: Only allow if lan_only mode is enabled
+        if not self.config.get("lan_only", True):
+            print("Warning: Discovery server requires lan_only mode for security.")
+            print("Please set 'lan_only': true in config.json")
+            return
+        
         try:
             # Create UDP socket for discovery
             self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self.server_socket.bind(('', discovery_port))
+            
+            # Bind to all interfaces (0.0.0.0) - required for UDP broadcast reception
+            # This is safe because:
+            # 1. lan_only mode is enforced (checked above)
+            # 2. Only listening for peer discovery messages
+            # 3. No external connectivity or sensitive data exposure
+            self.server_socket.bind(('0.0.0.0', discovery_port))
             
             print(f"Discovery server started on port {discovery_port}")
             print(f"Player: {self.config.get('player_name', 'Unknown')}")
